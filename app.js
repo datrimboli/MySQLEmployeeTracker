@@ -106,7 +106,7 @@ const addEmployee = () => {
       }))
 
       employees.unshift({ name: 'None', value: null })
-console.log(roles)
+
       prompt([
         {
           type: 'input',
