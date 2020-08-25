@@ -161,6 +161,18 @@ const viewDepartments = () => {
 }
 
 const addDepartment = () => {
+  prompt({
+    type: 'input',
+    name: 'name',
+    message: 'What is the new departments name?'
+  })
+    .then(department => {
+      db.query('INSERT INTO department SET ?', department, (err) => {
+        if (err) { console.log(err) }
+        console.log('Department Created!')
+        mainMenu()
+      })
+    })
 
 }
 
