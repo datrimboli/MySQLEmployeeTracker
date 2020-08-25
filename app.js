@@ -143,13 +143,20 @@ const addEmployee = () => {
   })
 }
 
-const updateEmployeeRole = () => { 
-  
-  return db.query ('UPDATE employee SET role_id = ? WHERE id = ?') 
+const updateEmployeeRole = () => {
+
+  return db.query('UPDATE employee SET role_id = ? WHERE id = ?')
 
 }
 
 const viewDepartments = () => {
+  db.query(`
+    SELECT * FROM department
+  `, (err, departments) => {
+    if (err) { console.log(err) }
+    console.table(departments)
+    mainMenu()
+  })
 
 }
 
