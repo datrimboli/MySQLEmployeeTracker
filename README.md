@@ -28,5 +28,6 @@ This employee tracker will allow organized, clear, cohesive workplace management
 
 Enjoy!
 
-Link to submitted video:
+Link to submitted video: https://youtu.be/zTI8T9vaJLw
+
 
