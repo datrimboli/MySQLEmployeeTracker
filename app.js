@@ -1,9 +1,11 @@
+// Bringing in requirer prompt via destructuring 
 const { prompt } = require('inquirer')
+// Bringing in MySQL
 const mysql = require('mysql2')
 require('console.table')
-
+// Connecting MySQL to VS Code
 const db = mysql.createConnection('mysql://root:rootroot@localhost/employee_db')
-
+// Main menu prompts and action options
 const mainMenu = () => {
   prompt([
     {
@@ -42,6 +44,7 @@ const mainMenu = () => {
       ]
     }
   ])
+    // Switch case directing the user to the appropriate function based on their selection from the main menu
     .then(({ choice }) => {
       switch (choice) {
         case 'viewEmployees':
@@ -69,7 +72,7 @@ const mainMenu = () => {
     })
     .catch(err => console.log(err))
 }
-
+// View all employees function
 const viewEmployees = () => {
   db.query(`
     SELECT employee.id, employee.first_name, employee.last_name,
@@ -88,7 +91,7 @@ const viewEmployees = () => {
     mainMenu()
   })
 }
-
+// Add employee function
 const addEmployee = () => {
   db.query('SELECT * FROM role', (err, roles) => {
     if (err) { console.log(err) }
@@ -106,7 +109,7 @@ const addEmployee = () => {
       }))
 
       employees.unshift({ name: 'None', value: null })
-
+      // Prompts to name your new employee, give your new employee a role, and choose a manager for the new employee
       prompt([
         {
           type: 'input',
@@ -142,7 +145,7 @@ const addEmployee = () => {
     })
   })
 }
-
+// Update employee role function
 const updateEmployeeRole = () => {
   db.query('SELECT * FROM employee', (err, employees) => {
     employees = employees.map(employee => ({
@@ -154,6 +157,7 @@ const updateEmployeeRole = () => {
         name: role.title,
         value: role.id
       }))
+      // Prompts for choosing which employee you would like to update, and for what the new role of the employee will be
       prompt([
         {
           type: 'list',
@@ -180,7 +184,7 @@ const updateEmployeeRole = () => {
     })
   })
 }
-
+// View departments function
 const viewDepartments = () => {
   db.query(`
     SELECT * FROM department
@@ -191,7 +195,7 @@ const viewDepartments = () => {
   })
 
 }
-
+// Add department function
 const addDepartment = () => {
   prompt({
     type: 'input',
@@ -207,7 +211,7 @@ const addDepartment = () => {
     })
 
 }
-
+// View roles function
 const viewRoles = () => {
   db.query(`
     SELECT role.title, role.salary FROM role
@@ -218,7 +222,7 @@ const viewRoles = () => {
   })
 
 }
-
+// Add Role function
 const addRole = () => {
   db.query('SELECT * FROM department', (err, departments) => {
     if (err) { console.log(err) }
@@ -236,7 +240,7 @@ const addRole = () => {
       }))
 
       roles.unshift({ name: 'None', value: null })
-
+      // Prompts for title of the new role created, salary for the new role created, and which department the newly created role will be a part of 
       prompt([
         {
           type: 'input',
@@ -251,7 +255,7 @@ const addRole = () => {
         {
           type: 'list',
           name: 'department_id',
-          message: 'Which department will the new rold fall under?:',
+          message: 'Which department will the new role fall under?:',
           choices: departments
         }
       ])
