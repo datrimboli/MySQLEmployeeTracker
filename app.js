@@ -158,13 +158,13 @@ const updateEmployeeRole = () => {
         {
           type: 'list',
           name: 'employee_id',
-          message: 'Choose an employee to update',
+          message: 'Which employee would you like to update?',
           choices: employees
         },
         {
           type: 'list',
           name: 'role_id',
-          message: 'Choose the employee new role',
+          message: 'What will be the new role of the employee?',
           choices: roles
         },
       ])
@@ -196,7 +196,7 @@ const addDepartment = () => {
   prompt({
     type: 'input',
     name: 'name',
-    message: 'What is the new departments name?'
+    message: 'What is the name of the new department?'
   })
     .then(department => {
       db.query('INSERT INTO department SET ?', department, (err) => {
@@ -246,12 +246,12 @@ const addRole = () => {
         {
           type: 'input',
           name: 'salary',
-          message: 'What is the salary?'
+          message: 'What is the new roles annual salary?'
         },
         {
           type: 'list',
           name: 'department_id',
-          message: 'choose department:',
+          message: 'Which department will the new rold fall under?:',
           choices: departments
         }
       ])
